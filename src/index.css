@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+#tasklist::-webkit-scrollbar{
+    display: none;
+}
+#remov::-webkit-scrollbar{
+    display: none;
+}
+#rmv::-webkit-scrollbar{
+    display: none;
+}
