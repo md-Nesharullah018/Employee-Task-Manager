@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 
 const TaskListNumber = ({ data }) => {
@@ -39,5 +38,3 @@ const TaskListNumber = ({ data }) => {
 };
 
 export default TaskListNumber;
-
-  

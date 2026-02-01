@@ -47,8 +47,8 @@ const employees = [
     },
     {
         "id": 2,
-        "firstName": "Sneha",
-        "email": "employee2@example.com",
+        "firstName": "Alex",
+        "email": "alex@ag.com",
         "password": "123",
         "taskCounts": {
             "active": 1,
@@ -81,7 +81,7 @@ const employees = [
     },
     {
         "id": 3,
-        "firstName": "Ravi",
+        "firstName": "Riyo",
         "email": "employee3@example.com",
         "password": "123",
         "taskCounts": {
@@ -125,7 +125,7 @@ const employees = [
     },
     {
         "id": 4,
-        "firstName": "Priya",
+        "firstName": "Carry",
         "email": "employee4@example.com",
         "password": "123",
         "taskCounts": {
@@ -159,7 +159,7 @@ const employees = [
     },
     {
         "id": 5,
-        "firstName": "Karan",
+        "firstName": "Lizad",
         "email": "employee5@example.com",
         "password": "123",
         "taskCounts": {

@@ -14,7 +14,6 @@ const CreateTask = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    //Create task object once
     const task = {
       taskTitle,
       taskDescription,
@@ -26,24 +25,21 @@ const CreateTask = () => {
       completed: false,
     };
 
-    // Immutable update
-    const updatedUsers = userData.map((user) => {
-      if (user.firstName === assignTo) {
-        return {
-          ...user,
-          tasks: [...(user.tasks || []), task],
-          taskCounts: {
-            ...user.taskCounts,
-            newTask: user.taskCounts.newTask + 1,
-          },
-        };
-      }
-      return user;
-    });
+    setUserData(
+      userData.map((u) =>
+        u.firstName === assignTo
+          ? {
+              ...u,
+              tasks: [...(u.tasks || []), task],
+              taskCounts: {
+                ...u.taskCounts,
+                newTask: u.taskCounts.newTask + 1,
+              },
+            }
+          : u
+      )
+    );
 
-    setUserData(updatedUsers);
-
-    // Reset form
     setTaskTitle("");
     setTaskDescription("");
     setTaskDate("");
@@ -52,43 +48,34 @@ const CreateTask = () => {
   };
 
   return (
-    <div className="p-5 bg-[#1c1c1c] mt-5 rounded">
-      <form onSubmit={submitHandler} className="flex flex-wrap w-full justify-between">
-        <div className="w-1/2">
-          <input
-            value={taskTitle}
-            onChange={(e) => setTaskTitle(e.target.value)}
-            placeholder="Task title"
-            className="w-4/5 mb-4 p-2 bg-transparent border text-white"
-          />
-          <input
-            type="date"
-            value={taskDate}
-            onChange={(e) => setTaskDate(e.target.value)}
-            className="w-4/5 mb-4 p-2 bg-transparent border text-white"
-          />
-          <input
-            value={assignTo}
-            onChange={(e) => setAssignTo(e.target.value)}
-            placeholder="Assign to"
-            className="w-4/5 mb-4 p-2 bg-transparent border text-white"
-          />
-          <input
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder="Category"
-            className="w-4/5 mb-4 p-2 bg-transparent border text-white"
-          />
-        </div>
+    <div className="rounded-2xl bg-[#020617]/80 border border-slate-700 shadow-xl p-6 md:p-8">
+      <h2 className="text-2xl md:text-3xl font-semibold text-white mb-6">
+        Create New Task
+      </h2>
 
-        <div className="w-2/5">
+      <form
+        onSubmit={submitHandler}
+        className="grid grid-cols-1 md:grid-cols-2 gap-5"
+      >
+        <Input label="Task Title" value={taskTitle} setValue={setTaskTitle} />
+        <Input label="Assign To" value={assignTo} setValue={setAssignTo} />
+        <Input label="Category" value={category} setValue={setCategory} />
+        <Input type="date" label="Due Date" value={taskDate} setValue={setTaskDate} />
+
+        <div className="md:col-span-2">
+          <label className="text-sm text-slate-400 mb-1 block">
+            Task Description
+          </label>
           <textarea
             value={taskDescription}
             onChange={(e) => setTaskDescription(e.target.value)}
-            className="w-full h-40 mb-4 p-2 bg-transparent border text-white"
-            placeholder="Task description"
+            className="w-full h-28 rounded-lg bg-[#020617] border border-slate-700 p-3 text-white outline-none focus:border-emerald-500 transition"
+            placeholder="Write task details..."
           />
-          <button className="w-full bg-emerald-500 py-2 rounded hover:bg-emerald-600">
+        </div>
+
+        <div className="md:col-span-2">
+          <button className="w-full bg-emerald-600 hover:bg-emerald-700 transition py-3 rounded-lg text-white font-medium">
             Create Task
           </button>
         </div>
@@ -96,5 +83,17 @@ const CreateTask = () => {
     </div>
   );
 };
+
+const Input = ({ label, value, setValue, type = "text" }) => (
+  <div>
+    <label className="text-sm text-slate-400 mb-1 block">{label}</label>
+    <input
+      type={type}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      className="w-full rounded-lg bg-[#020617] border border-slate-700 px-3 py-2 text-white outline-none focus:border-emerald-500 transition"
+    />
+  </div>
+);
 
 export default CreateTask;
